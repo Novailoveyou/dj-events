@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import styles from '../styles/Header.module.sass'
 
-export default function Header() {
+const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -22,3 +22,5 @@ export default function Header() {
     </header>
   )
 }
+
+export default Header

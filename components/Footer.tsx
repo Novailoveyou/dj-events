@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import styles from '../styles/Footer.module.sass'
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className={styles.footer}>
       <p>&copy; DJ Events 2021</p>
@@ -11,3 +11,5 @@ export default function Footer() {
     </footer>
   )
 }
+
+export default Footer

@@ -1,6 +1,6 @@
 import Layout from '../components/Layout'
 
-export default function About() {
+const About = () => {
   return (
     <Layout title='About DJ Events'>
       <h1>About</h1>
@@ -9,3 +9,5 @@ export default function About() {
     </Layout>
   )
 }
+
+export default About

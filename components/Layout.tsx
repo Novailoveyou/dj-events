@@ -3,7 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import styles from '../styles/Layout.module.sass'
 
-export default function Layout({ title, keywords, description, children }) {
+const Layout = ({ title, keywords, description, children }) => {
   return (
     <div>
       <Head>
@@ -26,3 +26,5 @@ Layout.defaultProps = {
   description: 'Find the latest DJ and other musical events',
   keywords: 'music, dj, edm, events',
 }
+
+export default Layout
