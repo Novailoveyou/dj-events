@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import styles from '../styles/Header.module.sass'
+import styles from '@/styles/Header.module.sass'
 
 const Header = () => {
   return (
