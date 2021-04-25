@@ -78,15 +78,4 @@ export async function getStaticProps({ params: { slug } }) {
 	}
 }
 
-// export async function getServerSideProps({ query: { slug } }) {
-//   const res = await fetch(`${API_URL}/api/events/${slug}`)
-//   const events = await res.json()
-
-//   return {
-//     props: {
-//       evt: events[0],
-//     },
-//   }
-// }
-
 export default Event
