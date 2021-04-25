@@ -27,12 +27,12 @@ const Event = ({
 				</div>
 
 				<span>
-					{date} at {time}
+					{new Date(date).toLocaleDateString('en-US')} at {time}
 				</span>
 				<h1>{name}</h1>
 				{image && (
 					<div className={styles.image}>
-						<Image src={image} width={960} height={600} />
+						<Image src={image.formats.medium.url} width={960} height={600} />
 					</div>
 				)}
 
@@ -52,7 +52,7 @@ const Event = ({
 }
 
 export async function getStaticPaths() {
-	const res = await fetch(`${API_URL}/api/events`)
+	const res = await fetch(`${API_URL}/events`)
 	const events = await res.json()
 
 	const paths = events.map(evt => ({
@@ -67,7 +67,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { slug } }) {
-	const res = await fetch(`${API_URL}/api/events/${slug}`)
+	const res = await fetch(`${API_URL}/events?slug=${slug}`)
 	const events = await res.json()
 
 	return {
