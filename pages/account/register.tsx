@@ -15,6 +15,13 @@ const registerPage = () => {
 
   const { register, error } = useContext(AuthContext)
 
+  useEffect(() => {
+    const getError = () => {
+      error && toast.error(error)
+    }
+    getError()
+  })
+
   const handleSubmit = e => {
     e.preventDefault()
 
@@ -70,7 +77,7 @@ const registerPage = () => {
             />
           </div>
 
-          <input type='submit' value='Login' className='btn' />
+          <input type='submit' value='Register' className='btn' />
         </form>
 
         <p>
