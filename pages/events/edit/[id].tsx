@@ -2,6 +2,7 @@ import moment from 'moment'
 import { FaImage } from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { parseCookies } from '@/helpers/index'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -15,7 +16,8 @@ import { useEffect, useContext } from 'react'
 import AuthContext from '@/context/AuthContext'
 
 const EditEventPage = ({
-  evt: { id, image, name, performers, venue, address, date, time, description }
+  evt: { id, image, name, performers, venue, address, date, time, description },
+  token
 }) => {
   const [values, setValues] = useState({
     name,
@@ -56,12 +58,17 @@ const EditEventPage = ({
     const res = await fetch(`${API_URL}/events/${id}`, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify(values)
     })
 
     if (!res.ok) {
+      if (res.status === 403 || res.status === 401) {
+        toast.error('Unauthorized')
+        return
+      }
       toast.error('Something went wrong')
     } else {
       const evt = await res.json()
@@ -180,13 +187,15 @@ const EditEventPage = ({
       </div>
 
       <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <ImageUpload evtId={id} imageUploaded={imageUploaded} />
+        <ImageUpload evtId={id} imageUploaded={imageUploaded} token={token} />
       </Modal>
     </Layout>
   )
 }
 
 export async function getServerSideProps({ params: { id }, req }) {
+  const { token } = parseCookies(req)
+
   const res = await fetch(`${API_URL}/events/${id}`)
   const evt = await res.json()
 
@@ -194,7 +203,8 @@ export async function getServerSideProps({ params: { id }, req }) {
 
   return {
     props: {
-      evt
+      evt,
+      token
     }
   }
 }
