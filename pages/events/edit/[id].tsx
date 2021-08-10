@@ -11,6 +11,8 @@ import Modal from '@/components/Modal'
 import ImageUpload from '@/components/ImageUpload'
 import { API_URL } from '@/config/index'
 import styles from '@/styles/Form.module.sass'
+import { useEffect, useContext } from 'react'
+import AuthContext from '@/context/AuthContext'
 
 const EditEventPage = ({
   evt: { id, image, name, performers, venue, address, date, time, description }
@@ -24,6 +26,16 @@ const EditEventPage = ({
     time,
     description
   })
+
+  const { error } = useContext(AuthContext)
+
+  useEffect(() => {
+    const getError = () => {
+      error && toast.error(error)
+    }
+    getError()
+  })
+
   const [imagePreview, setImagePreview] = useState(
     image ? image.formats.thumbnail.url : null
   )
