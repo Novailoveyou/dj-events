@@ -3,6 +3,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Link from 'next/link'
 import Image from 'next/image'
 import Layout from '@/components/Layout'
+import EventMap from '@/components/EventMap'
 import { API_URL } from '@/config/index'
 import styles from '@/styles/Event.module.sass'
 
@@ -29,6 +30,8 @@ const Event = ({
         <p>{description}</p>
         <h3>Venue: {venue}</h3>
         <p>{address}</p>
+
+        <EventMap id={id} address={address} />
 
         <Link href='/events'>
           <a className={styles.back}>{'<'} Go Back</a>
