@@ -4,7 +4,6 @@ import EventItem from '@/components/EventItem'
 import { API_URL } from '@/config/index'
 
 const Home = ({ events }) => {
-  //
   return (
     <Layout>
       <h1>Upcoming Events</h1>
